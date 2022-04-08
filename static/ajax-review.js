@@ -18,7 +18,14 @@ function showWeather(evt) {
   evt.preventDefault();
   const zipcode = document.querySelector('#zipcode-field').value;
   const url = `/weather?zipcode=${zipcode}`;
-  // TODO: request weather with that URL and show the forecast in #weather-info
+  // request weather with that URL and show the forecast in #weather-info
+
+  fetch(url)
+  .then(response => response.json())
+  .then(weatherForecast => {
+    document.querySelector('#weather-info').innerHTML = weatherForecast.forecast; 
+    //.forecast is our key and we are accessing the value
+  });
 }
 
 document.querySelector('#weather-form').addEventListener('submit', showWeather);
